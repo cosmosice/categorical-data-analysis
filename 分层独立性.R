@@ -1,0 +1,25 @@
+M1 <- matrix(c(9,11,13,297,446,511),nr=2,byrow = T)#(上，涨)
+M2 <- matrix(c(6,4,3,47,57,59),nr=2,byrow = T)
+M3 <- matrix(c(6,8,9,377,613,826),nr=2,byrow = T)
+M4 <- matrix(c(8,7,7,81,92,116),nr=2,byrow = T)
+M5 <- matrix(c(306,457,524,53,61,62),nr=2,byrow = T)#去除ST(上)
+M6 <- matrix(c(383,621,835,89,99,123),nr=2,byrow = T)
+M7 <- matrix(c(306,457,524,383,621,835),nr=2,byrow = T)#去除ST(涨)
+M8 <- matrix(c(53,61,62,89,99,123),nr=2,byrow = T)
+L <- list(M1,M2,M3,M4)
+mc1 <- chisq.test(L[[1]])
+mc2 <- chisq.test(L[[2]])
+mc3 <- chisq.test(L[[3]])
+mc4 <- chisq.test(L[[4]])
+df <- data.frame(chisq=c(mc1$statistic,mc2$statistic,mc3$statistic,mc4$statistic),p=c(mc1$p.value,mc2$p.value,mc3$p.value,mc4$p.value))
+df
+#write.csv(df,'分层独立性.csv')
+mc5 <- chisq.test(M5)
+mc6 <- chisq.test(M6)
+df2 <- data.frame(chisq=c(mc5$statistic,mc6$statistic),p=c(mc5$p.value,mc6$p.value))
+df2
+
+mc7 <- chisq.test(M7)
+mc8 <- chisq.test(M8)
+df3 <- data.frame(chisq=c(mc7$statistic,mc8$statistic),p=c(mc7$p.value,mc8$p.value))
+df3
